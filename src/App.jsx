@@ -22,7 +22,7 @@ const DCATS = ["Radiographie", "IRM", "Scanner", "Bilan biologique", "ECG", "Aut
 
 
 const DOCS0 = [
-  { id: "doc_martin", name: "Dr. Sarah Martin", email: "martin@clinique.fr", password: "medecin123", specialty: "Médecine Générale", phone: "06 12 34 56 78" },
+  { id: "doc_chani", name: "Pr. Chani Mohamed", email: "chani.mohamed@ussi.ma", password: "ussi2026", specialty: "Médecine Générale", phone: "" },
   { id: "doc_dupont", name: "Dr. Pierre Dupont", email: "dupont@clinique.fr", password: "medecin123", specialty: "Cardiologie", phone: "06 98 76 54 32" },
 ];
 
