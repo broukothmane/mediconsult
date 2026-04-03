@@ -40,7 +40,7 @@ async function LDD() { try { const { data } = await SB.from("doc_state").select(
 async function SVD(d) { try { await SB.from("doc_state").upsert({ id: "main", docs: d, updated_at: new Date().toISOString() }); } catch {} }
 
 /* ══════ AI ENGINE — calls local proxy at localhost:3001 ══════ */
-const AI_URL = "http://localhost:3001/ai";
+const AI_URL = "/api/ai";
 
 async function aiCall(messages, mt = 2000) {
   try {
