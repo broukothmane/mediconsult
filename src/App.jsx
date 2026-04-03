@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const T = {
@@ -32,10 +33,11 @@ function useR() {
   return { w, m: w < 768 };
 }
 
-async function LD() { try { const r = localStorage.getItem("ussi-app-v6"); return r ? JSON.parse(r) : null; } catch { return null; } }
-async function SV(d) { try { localStorage.setItem("ussi-app-v6", JSON.stringify(d)); } catch {} }
-async function LDD() { try { const r = localStorage.getItem("ussi-docs-v6"); return r ? JSON.parse(r) : []; } catch { return []; } }
-async function SVD(d) { try { localStorage.setItem("ussi-docs-v6", JSON.stringify(d)); } catch {} }
+const SB = createClient("https://ojymuxcnpkpaisnkztjp.supabase.co", "sb_publishable_sd-aM6Wz5tjpEpgGZ-rRxQ_vQ2kCP_w");
+async function LD() { try { const { data } = await SB.from("app_state").select("data").eq("id","main").single(); return data?.data || null; } catch { return null; } }
+async function SV(d) { try { await SB.from("app_state").upsert({ id: "main", data: d, updated_at: new Date().toISOString() }); } catch {} }
+async function LDD() { try { const { data } = await SB.from("doc_state").select("docs").eq("id","main").single(); return data?.docs || []; } catch { return []; } }
+async function SVD(d) { try { await SB.from("doc_state").upsert({ id: "main", docs: d, updated_at: new Date().toISOString() }); } catch {} }
 
 /* ══════ AI ENGINE — calls local proxy at localhost:3001 ══════ */
 const AI_URL = "http://localhost:3001/ai";
